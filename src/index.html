@@ -3,7 +3,73 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link rel="stylesheet" href="src/styles.css" />
+    <title>BeerShop</title>
   </head>
-  <body></body>
+  <body>
+    <div class="container">
+      <main class="main">
+        <div class="main__header">
+          <div class="sort">
+            <div class="sort__spirt">
+              <span>По содержанию спирта</span>
+              <button
+                type="button"
+                class="sort__button sort__button--spirt-low"
+              >
+                ^
+              </button>
+              <button
+                type="button"
+                class="sort__button sort__button--spirt-high"
+              >
+                v
+              </button>
+            </div>
+            <div class="sort__ibu">
+              <span>По горечи IBU</span>
+              <button type="button" class="sort__button sort__button--ibu-low">
+                ^
+              </button>
+              <button type="button" class="sort__button sort__button--ibu-high">
+                v
+              </button>
+            </div>
+          </div>
+          <a href="#" class="feedback">Обратная связь</a>
+        </div>
+        <div class="pagination">
+          <a href="#" class="pagination__back">Назад</a>
+          <span class="pagination__current">Страница</span>
+          <a href="#" class="pagination__forward">Вперед</a>
+        </div>
+        <div class="catalog">К сожалению, ничего нет :(</div>
+      </main>
+      <aside class="favourite">
+        <span class="favourite__title">Избранное</span>
+      </aside>
+    </div>
+    <form class="form">
+      <div class="form__header">
+        <span>Форма регистрации</span>
+        <button class="form__close form__close--top"></button>
+      </div>
+      <label>
+        Телефон
+        <input type="text" class="form__number" />
+      </label>
+      <label>
+        Email
+        <input type="email" class="form__email" />
+      </label>
+      <label>
+        Пароль
+        <input type="password" class="form__pass" />
+      </label>
+      <button type="button" class="form__close form__close--bottom">
+        Закрыть
+      </button>
+      <button type="submit" class="form__submit" disabled>Отправить</button>
+    </form>
+  </body>
 </html>
