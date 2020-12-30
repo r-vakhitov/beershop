@@ -1,5 +1,6 @@
 import { isValid, regExp } from "./utils";
 import { Database } from "./database";
+import { render } from "./render";
 
 const form = document.querySelector(".form");
 const inputTel = form.querySelector(".form__number");
@@ -7,6 +8,7 @@ const inputEmail = form.querySelector(".form__email");
 const inputPassword = form.querySelector(".form__pass");
 const submitBtn = form.querySelector(".form__submit");
 const formInputs = form.querySelectorAll("input");
+const catalog = document.querySelector(".catalog");
 
 function formIsValid() {
   return (
@@ -42,3 +44,9 @@ function submitFormHandler(evt) {
     });
   }
 }
+
+Database.getCatalog(
+  "https://beershop-c42a5-default-rtdb.firebaseio.com/catalog.json"
+).then((arr) => {
+  render(arr, catalog);
+});
