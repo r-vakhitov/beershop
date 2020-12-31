@@ -1,9 +1,9 @@
 export function render(arr, node) {
-  const resultHtml = `<ul>${arr
+  const resultHtml = `<ul class="catalog__list">${arr
     .map((el) => {
       return `
             <li>
-                <img src=${el.image_url}>
+                <img src=${el.image_url} width=100>
                 <span>${el.name}</span>
                 <p>
                     <span>Поставщик: ${el.contributed_by}</span>
@@ -14,6 +14,6 @@ export function render(arr, node) {
             </li>
             `;
     })
-    .join()}</ul>`;
+    .join('')}</ul>`;
   node.innerHTML = resultHtml;
 }
