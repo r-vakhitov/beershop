@@ -1,15 +1,12 @@
 export class Database {
-  static create(user) {
-    return fetch(
-      "https://beershop-c42a5-default-rtdb.firebaseio.com/users.json",
-      {
-        method: "POST",
-        body: JSON.stringify(user),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
+  static create(user, url) {
+    return fetch(url, {
+      method: "POST",
+      body: JSON.stringify(user),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
       .then((response) => response.json())
       .then((response) => {
         console.log(response);
