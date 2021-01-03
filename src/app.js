@@ -3,7 +3,7 @@ import { formIsValid, submitFormHandler } from "./form";
 import { sortByValueAsc, sortByValueDesc } from "./utils";
 
 const form = document.querySelector(".form");
-
+const favBlock = document.querySelector(".favourites");
 const submitBtn = form.querySelector(".form__submit");
 const formInputs = form.querySelectorAll("input");
 const nextPage = document.querySelector(".pagination__forward");
