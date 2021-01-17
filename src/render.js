@@ -2,11 +2,18 @@ import { paginate } from "./pagination";
 import { Database } from "./database";
 const URL = "https://beershop-c42a5-default-rtdb.firebaseio.com/catalog.json";
 const ITEMS_ON_PAGE = 9;
-let favourites = [];
 
 const catalog = document.querySelector(".catalog");
 const favBlock = document.querySelector(".favourites");
+const cleanFavsBtn = document.querySelector(".favourite__clean-btn");
 let removeBtns = [];
+let favourites = getFavsFromLocalStorage();
+
+cleanFavsBtn.addEventListener("click", () => {
+  favourites = [];
+  refreshLocalStorage();
+  renderFav();
+});
 
 function isInFavCheck(nodeList) {
   nodeList.forEach((node) => {
@@ -18,22 +25,42 @@ function isInFavCheck(nodeList) {
   });
 }
 
+function getFavsFromLocalStorage() {
+  return JSON.parse(localStorage.getItem("favourites") || "[]");
+}
+
+function refreshLocalStorage() {
+  localStorage.setItem("favourites", JSON.stringify(favourites));
+}
+
 function render(arr) {
   const resultHtml = `<ul class="catalog__list">${arr
     .map((el) => {
       return `
-            <li>
-                <img src=${el.image_url} width=100>
-                <span>${el.name}</span>
-                <p>
-                    <span>Поставщик: ${el.contributed_by}</span>
-                    <span>Впервые сварено: ${el.first_brewed}</span>
-                    <span>Горечь IBU: ${el.ibu ? el.ibu : "Неизвестно"}</span>
-                    <span>Алкоголь: ${el.abv}%</span>
-                </p>
-                <button id=${
-                  el.id
-                } type="button" class="item__fav-btn">В избранное</button>
+            <li class="item">
+                <img class="item__image" src=${el.image_url} width=100>
+                <div class="item__description">
+                  <span class="item__name">${el.name}</span>
+                  <div class="item__text-wrapper">
+                    <span>Поставщик:</span> 
+                    <span>${el.contributed_by}</span>
+                  </div>
+                  <div class="item__text-wrapper">
+                    <span>Впервые сварено:</span> 
+                    <span> ${el.first_brewed}</span>
+                  </div>
+                  <div class="item__text-wrapper">
+                    <span>Горечь IBU:</span> 
+                    <span> ${el.ibu ? el.ibu : "Неизвестно"}</span>
+                  </div>
+                  <div class="item__text-wrapper">
+                    <span>Алкоголь:</span> 
+                    <span> ${el.abv}%</span>
+                  </div>
+                  <button id=${
+                    el.id
+                  } type="button" class="item__fav-btn">В избранное</button>
+                </div>
             </li>
             `;
     })
@@ -42,12 +69,12 @@ function render(arr) {
   renderFav();
 }
 
-function renderFav(addToFavBtns) {
+export function renderFav(addToFavBtns) {
   const resultHtml = `
   <ul class="favourites__list">${favourites
     .map((el) => {
       return `
-            <li>
+            <li class="favourites__item">
             <span>${el.name}</span>
             <button id="${el.id}" class="favourites__remove-btn">x</button>
             </li>
@@ -60,6 +87,7 @@ function renderFav(addToFavBtns) {
     el.addEventListener("click", (evt) => {
       const buttonId = evt.target.id;
       favourites = favourites.filter((el) => el.id !== buttonId);
+      refreshLocalStorage();
       isInFavCheck(addToFavBtns);
       renderFav(addToFavBtns);
     });
@@ -89,6 +117,7 @@ const favHandler = (event, addToFavBtns) => {
   };
   if (!favourites.find((obj) => obj.id === beer.id)) {
     favourites.push(beer);
+    refreshLocalStorage();
     renderFav(addToFavBtns);
   }
 };

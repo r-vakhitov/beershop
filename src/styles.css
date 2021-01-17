@@ -1,6 +1,33 @@
-.main {
-  width: 800px;
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap");
+
+body {
+  background-color: #32435c;
+  color: aliceblue;
+  font-family: "Nunito", sans-serif;
 }
+
+a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: bold;
+  display: block;
+  padding: 4px 10px;
+  border: 1px solid #1b2d44;
+  border-radius: 2px;
+}
+
+a:hover {
+  color: #77c6f5;
+}
+
+a:active {
+  opacity: 0.5;
+}
+
+.main {
+  width: 790px;
+}
+
 .main__header {
   display: flex;
   justify-content: space-between;
@@ -8,10 +35,35 @@
 
 .sort {
   display: flex;
+  justify-content: space-between;
+  width: 500px;
+}
+
+.sort__button {
+  width: 16px;
+  height: 16px;
+  border: none;
+  background-color: inherit;
+  background-size: cover;
+  margin-left: 10px;
+}
+
+.sort__button:hover {
+  cursor: pointer;
+}
+
+.sort__button--abv-desc,
+.sort__button--ibu-desc {
+  background-image: url("./icons/caret-down.svg");
+}
+
+.sort__button--abv-asc,
+.sort__button--ibu-asc {
+  background-image: url("./icons/sort-up.svg");
 }
 
 .container {
-  width: 1000px;
+  width: 1100px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -20,19 +72,88 @@
 .pagination {
   display: flex;
   justify-content: space-between;
+  margin-top: 30px;
 }
 
 .form {
+  min-height: 240px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   width: 400px;
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  padding: 20px;
+  margin-left: -200px;
+  background-color: aliceblue;
+  border: 1px solid #056299;
+  color: #10223c;
+  border-radius: 4px;
+  z-index: 99999;
+  opacity: 1;
+}
+
+.form__header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form__close--top {
+  border: none;
+  font-family: inherit;
+  font-weight: bold;
+  background-color: inherit;
+}
+
+.form__close--top:hover {
+  cursor: pointer;
+}
+
+.form__label {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form__label input {
+  margin-left: 30px;
+  flex-grow: 1;
+}
+
+.form__label span {
+  position: relative;
+}
+
+.form__label-valid span::after {
+  content: "v";
+  position: absolute;
+  right: -25px;
+  width: 15px;
+  height: 15px;
+}
+
+.form-wrapper {
+  display: none;
+}
+
+.form-wrapper::before {
+  content: "";
+  background: #000;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.7;
+  z-index: 9999;
 }
 
 .catalog__list {
   list-style: none;
   padding: 0;
   display: grid;
-  grid-template-columns: 200px 200px 200px;
+  grid-template-columns: 250px 250px 250px;
   gap: 20px;
 }
 
@@ -42,11 +163,114 @@
 }
 
 .favourite {
-  width: 150px;
+  width: 250px;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+.favourite__controls {
+  display: flex;
+  justify-content: space-between;
+}
+
+.favourite__title {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.favourite__clean-btn:hover {
+  color: #77c6f5;
+  cursor: pointer;
+}
+
+.favourites__remove-btn {
+  background-color: inherit;
+  color: inherit;
+  border: none;
+  font-size: 16px;
+}
+
+.favourites__remove-btn:hover {
+  cursor: pointer;
+  color: #77c6f5;
+}
+
+.favourites__remove-btn:active {
+  opacity: 0.5;
 }
 
 .favourites__list {
   list-style: none;
   padding: 0;
   margin: 0;
+}
+
+.favourites__item {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.item {
+  border: 2px solid #10223c;
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  font-size: 15px;
+}
+
+.item:hover {
+  box-shadow: -2px 3px 6px 0px rgba(50, 50, 50, 0.8);
+  border-color: #056299;
+  background-color: #1b2d44;
+}
+
+.item__image {
+  display: block;
+  margin: auto;
+}
+
+.item__name {
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 15px;
+  margin-top: 15px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.item__description {
+  display: flex;
+  flex-direction: column;
+}
+
+.item__text-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.item__fav-btn {
+  background-color: inherit;
+  margin-top: 10px;
+  border: 1px solid #10223c;
+  border-radius: 5px;
+  color: inherit;
+  font-size: inherit;
+  padding: 5px;
+  font-weight: bold;
+  font-family: inherit;
+}
+
+.item__fav-btn:hover {
+  color: #10223c;
+  background-color: aliceblue;
+  cursor: pointer;
+}
+
+.item__fav-btn:active {
+  opacity: 0.5;
 }
