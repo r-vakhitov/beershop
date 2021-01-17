@@ -14,14 +14,20 @@ const URL = "https://beershop-c42a5-default-rtdb.firebaseio.com/users.json";
 export function formIsValid() {
   if (isValid(inputTel.value.trim(), regExp.tel)) {
     formLabels.item(0).classList.add("form__label-valid");
+  } else {
+    formLabels.item(0).classList.remove("form__label-valid");
   }
 
   if (isValid(inputEmail.value, regExp.email)) {
     formLabels.item(1).classList.add("form__label-valid");
+  } else {
+    formLabels.item(1).classList.remove("form__label-valid");
   }
 
   if (isValid(inputPassword.value, regExp.password)) {
     formLabels.item(2).classList.add("form__label-valid");
+  } else {
+    formLabels.item(2).classList.remove("form__label-valid");
   }
 
   return (
@@ -44,8 +50,9 @@ export function submitFormHandler(evt) {
 
     Database.create(user, URL).then(() => {
       formInputs.forEach((input) => (input.value = ""));
-      // Здесь надо будет убрать класс невалидности
-
+      formLabels.forEach((label) => {
+        label.classList.remove("form__label-valid");
+      });
       submitBtn.disabled = true;
     });
   }

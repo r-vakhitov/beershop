@@ -125,12 +125,16 @@ a:active {
   position: relative;
 }
 
-.form__label-valid span::after {
-  content: "v";
+.form__label span::after {
+  content: "x";
   position: absolute;
   right: -25px;
   width: 15px;
   height: 15px;
+}
+
+.form__label-valid span::after {
+  content: "v";
 }
 
 .form-wrapper {
