@@ -95,18 +95,15 @@ export function renderFav(addToFavBtns) {
 }
 
 export function renderPage(page, sortHandler = null) {
-  Database.getCatalog(URL)
-    .then((data) => {
-      const sortedData = sortHandler ? sortHandler(data) : data;
-      return paginate(sortedData, page, ITEMS_ON_PAGE);
-    })
-    .then((arr) => {
-      render(arr, catalog);
-      const addToFavBtns = document.querySelectorAll(".item__fav-btn");
-      fav(addToFavBtns);
-      isInFavCheck(addToFavBtns);
-      renderFav(addToFavBtns);
-    });
+  Database.getCatalog(URL).then((data) => {
+    const sortedData = sortHandler ? sortHandler(data) : data;
+    const paginatedCatalog = paginate(sortedData, page, ITEMS_ON_PAGE);
+    render(paginatedCatalog, catalog);
+    const addToFavBtns = document.querySelectorAll(".item__fav-btn");
+    addHandlerToFavBtns(addToFavBtns);
+    isInFavCheck(addToFavBtns);
+    renderFav(addToFavBtns);
+  });
 }
 
 const favHandler = (event, addToFavBtns) => {
@@ -122,7 +119,7 @@ const favHandler = (event, addToFavBtns) => {
   }
 };
 
-function fav(addToFavBtns) {
+function addHandlerToFavBtns(addToFavBtns) {
   addToFavBtns.forEach((el) => {
     el.addEventListener("click", (evt) => {
       favHandler(evt, addToFavBtns);

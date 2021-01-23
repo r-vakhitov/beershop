@@ -1,6 +1,6 @@
 import { renderPage } from "./render";
 import { formIsValid, submitFormHandler } from "./form";
-import { sortByValueAsc, sortByValueDesc } from "./utils";
+import { sortByValue } from "./utils";
 
 const popUp = document.querySelector(".form-wrapper");
 const form = popUp.querySelector(".form");
@@ -50,22 +50,22 @@ prevPage.addEventListener("click", () => {
 });
 
 sortBtnAbvAsc.addEventListener("click", () => {
-  sortFunc = sortByValueAsc.bind(null, "abv");
+  sortFunc = sortByValue.bind(null, "abv", "asc");
   renderPage(currentPage, sortFunc);
 });
 
 sortBtnAbvDesc.addEventListener("click", () => {
-  sortFunc = sortByValueDesc.bind(null, "abv");
+  sortFunc = sortByValue.bind(null, "abv", "desc");
   renderPage(currentPage, sortFunc);
 });
 
 sortBtnIbuAsc.addEventListener("click", () => {
-  sortFunc = sortByValueAsc.bind(null, "ibu");
+  sortFunc = sortByValue.bind(null, "ibu", "asc");
   renderPage(currentPage, sortFunc);
 });
 
 sortBtnIbuDesc.addEventListener("click", () => {
-  sortFunc = sortByValueDesc.bind(null, "ibu");
+  sortFunc = sortByValue.bind(null, "ibu", "desc");
   renderPage(currentPage, sortFunc);
 });
 

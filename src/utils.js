@@ -8,14 +8,14 @@ export const regExp = {
   password: /\S{6,}/,
 };
 
-export function sortByValueAsc(prop, objects) {
+export function sortByValue(prop, order, objects) {
   const objectsCopy = JSON.parse(JSON.stringify(objects));
-  objectsCopy.sort((a, b) => parseFloat(a[prop]) - parseFloat(b[prop]));
-  return objectsCopy;
-}
-
-export function sortByValueDesc(prop, objects) {
-  const objectsCopy = JSON.parse(JSON.stringify(objects));
-  objectsCopy.sort((a, b) => parseFloat(b[prop]) - parseFloat(a[prop]));
-  return objectsCopy;
+  switch (order) {
+    case "asc":
+      objectsCopy.sort((a, b) => parseFloat(a[prop]) - parseFloat(b[prop]));
+      return objectsCopy;
+    case "desc":
+      objectsCopy.sort((a, b) => parseFloat(b[prop]) - parseFloat(a[prop]));
+      return objectsCopy;
+  }
 }
